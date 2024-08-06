@@ -2,6 +2,7 @@ let listNumbersSecrets = [];
 //Criando funções
 function mudarTextoNoHtml(tag,text){
     document.querySelector(tag).innerHTML = text;
+    responsiveVoice.speak(text, 'Brazilian Portuguese Male', {rate:1.2});
 }
 function generateNumSecret(){
     let numGenerated = parseInt((Math.random()*numSecret_max)+1);
