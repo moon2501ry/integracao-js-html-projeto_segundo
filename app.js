@@ -1,26 +1,38 @@
+let listNumbersSecrets = [];
 //Criando funções
 function mudarTextoNoHtml(tag,text){
     document.querySelector(tag).innerHTML = text;
 }
-function generateNumSecret() {
-    return parseInt((Math.random()*100)+1);
+function generateNumSecret(){
+    let numGenerated = parseInt((Math.random()*numSecret_max)+1);
+    if (listNumbersSecrets.length == numSecret_max){listNumbersSecrets = [];};
+    if (listNumbersSecrets.includes(numGenerated)){
+        return generateNumSecret();
+    }else{
+        listNumbersSecrets.push = [numGenerated];
+        return numGenerated;
+    }
+}
+function generateMaxSecret(){
+    return parseInt((Math.random()*100)+101);
 }
 function clearInput(){
     numEscolhido = document.querySelector('input');
     numEscolhido.value = "";
 }
 //Interação com CSS(Codigo pego no google), função feita por mim.
-function setCursorStyle(id, style) {
+function setCursorStyle(id, style){
     document.getElementById(id).addEventListener('mouseover', function() {this.style.cursor = style;});
 }
 setCursorStyle("chutarbutton", "pointer");
 setCursorStyle("reiniciar", "pointer");
 //Definindo variaveis
+let numSecret_max = generateMaxSecret();
 let numTimer = 0;
 let numSecret = generateNumSecret();
 //Mudando o texto do html
 mudarTextoNoHtml("h1", "Jogo do número secreto");
-mudarTextoNoHtml("p", "Escolha um número entre 1 e 100");
+mudarTextoNoHtml("p", `Escolha um número entre 1 e ${numSecret_max}`);
 //Interação com html
 document.addEventListener('keypress', function(event) { if (event.key === 'Enter'){verifyButton();} });
 function verifyButton(){
@@ -39,7 +51,8 @@ function verifyButton(){
         }
     }
 }
-function reiniciarButton() {
+function reiniciarButton(){
+
     numSecret = generateNumSecret();
     clearInput();
     numTimer = 0;
