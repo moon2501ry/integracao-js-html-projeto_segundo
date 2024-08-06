@@ -57,6 +57,6 @@ function reiniciarButton(){
     clearInput();
     numTimer = 0;
     mudarTextoNoHtml("h1", "Jogo do número secreto");
-    mudarTextoNoHtml("p", "Escolha um número entre 1 e 100");
+    mudarTextoNoHtml("p", `Escolha um número entre 1 e ${numSecret_max}`);
     document.getElementById("reiniciar").setAttribute("disabled", true);;
 }
